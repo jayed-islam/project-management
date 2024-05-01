@@ -3,6 +3,9 @@ import { EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 import { Avatar, Card, Modal } from "antd";
 import { IProject } from "@/types/project";
 import useProjectStore from "@/zustand/project-state";
+import EditProjectForm from "./project-edit-form";
+import Image from "next/image";
+import useBoolean from "@/hooks/use-boolean";
 
 const { Meta } = Card;
 
@@ -11,22 +14,8 @@ interface ProjectProps {
 }
 const ProjectCard = ({ project }: ProjectProps) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<IProject | null>(null);
-  const { projects, editProject } = useProjectStore();
 
-  const handleEditClick = (project: IProject) => {
-    setSelectedProject(project);
-    setIsModalVisible(true);
-  };
-
-  const handleSaveEdit = (updatedProject: IProject) => {
-    editProject(updatedProject.id, updatedProject);
-    setIsModalVisible(false);
-  };
-
-  const handleCancelEdit = () => {
-    setIsModalVisible(false);
-  };
+  const modal = useBoolean();
 
   return (
     <Card
@@ -37,14 +26,11 @@ const ProjectCard = ({ project }: ProjectProps) => {
       }
       actions={[
         <EyeOutlined key="View" />,
-        <EditOutlined key="edit" />,
+        <EditOutlined key="edit" onClick={modal.setTrue} />,
         <DeleteOutlined key="Delete" />,
       ]}
     >
       <Meta
-        avatar={
-          <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />
-        }
         title={project.title}
         description={
           <p className="line-clamp-2 overflow-ellipsis">
@@ -54,20 +40,16 @@ const ProjectCard = ({ project }: ProjectProps) => {
         className="custom-description"
       />
 
-      {selectedProject && (
+      {modal.value && (
         <Modal
           title="Edit Project"
-          visible={isModalVisible}
-          onCancel={handleCancelEdit}
+          centered
+          open={modal.value}
+          onOk={modal.setFalse}
+          onCancel={modal.setFalse}
           footer={null}
         >
-          {selectedProject && (
-            <EditProjectForm
-              project={selectedProject}
-              onSave={handleSaveEdit}
-              onCancel={handleCancelEdit}
-            />
-          )}
+          <EditProjectForm project={project} modal={modal} />
         </Modal>
       )}
     </Card>

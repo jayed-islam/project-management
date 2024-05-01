@@ -1,64 +1,53 @@
 import React, { useState } from "react";
-import { Button, Form, Input, Modal } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { IProject } from "@/types/project";
+import useProjectStore from "@/zustand/project-state";
 
 interface EditProjectFormProps {
   project: IProject;
-  onSave: (updatedProject: IProject) => void;
-  onCancel: () => void;
+  modal: {
+    value: boolean;
+    setTrue: () => void;
+    setFalse: () => void;
+    toggle: () => void;
+    setValue: React.Dispatch<React.SetStateAction<boolean>>;
+  };
 }
 
 const EditProjectForm: React.FC<EditProjectFormProps> = ({
   project,
-  onSave,
-  onCancel,
+  modal,
 }) => {
-  const [editedProject, setEditedProject] = useState<IProject>(project);
+  const { editProject } = useProjectStore();
 
-  const handleSave = () => {
-    onSave(editedProject);
-  };
+  const handleSave = (values: IProject) => {
+    const updatedProject = { ...project, ...values };
+    editProject(project.id, updatedProject);
 
-  const handleCancel = () => {
-    onCancel();
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setEditedProject((prevProject) => ({
-      ...prevProject,
-      [name]: value,
-    }));
+    modal.setFalse();
+    message.success("Project updated successfully!");
   };
 
   return (
-    <Form>
-      <Form.Item label="Title">
-        <Input
-          name="title"
-          value={editedProject.title}
-          onChange={handleChange}
-        />
+    <Form
+      initialValues={project}
+      onFinish={handleSave}
+      onFinishFailed={() => {}}
+    >
+      <Form.Item label="Title" name="title">
+        <Input />
       </Form.Item>
-      <Form.Item label="Description">
-        <Input.TextArea
-          name="description"
-          value={editedProject.description}
-          onChange={handleChange}
-        />
+      <Form.Item label="Description" name="description">
+        <Input.TextArea />
       </Form.Item>
-      <Form.Item label="Image URL">
-        <Input
-          name="image"
-          value={editedProject.image}
-          onChange={handleChange}
-        />
+      <Form.Item label="Image URL" name="image">
+        <Input />
       </Form.Item>
       <Form.Item>
-        <Button type="primary" onClick={handleSave}>
+        <Button type="primary" htmlType="submit">
           Save
         </Button>
-        <Button onClick={handleCancel}>Cancel</Button>
+        <Button onClick={modal.setFalse}>Cancel</Button>
       </Form.Item>
     </Form>
   );

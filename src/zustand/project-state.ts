@@ -32,7 +32,7 @@ const useProjectStore = create<ProjectState>((set) => ({
         localStorage.setItem("projects", JSON.stringify(data.projects));
 
         set({
-          projects: data.projects as IProject[],
+          projects: data.projects as unknown as IProject[],
           isLoading: false,
           error: null,
         });
@@ -48,10 +48,11 @@ const useProjectStore = create<ProjectState>((set) => ({
       return { projects: updatedProjects };
     });
   },
-  editProject: (projectId: number, updatedProject: IProject) => {
+
+  editProject: (projectId: number, updatedProject: Partial<IProject>) => {
     set((state) => {
       const updatedProjects = state.projects.map((project) =>
-        project.id === projectId ? updatedProject : project
+        project.id === projectId ? { ...project, ...updatedProject } : project
       );
       localStorage.setItem("projects", JSON.stringify(updatedProjects));
       return { projects: updatedProjects };
