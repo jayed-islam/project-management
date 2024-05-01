@@ -1,100 +1,94 @@
-{
-  "projects": [
-    {
-      "id": 1,
-      "title": "Enhanced Project Management System",
-      "description": "A comprehensive project management system designed to streamline project workflows, manage tasks efficiently, and track project progress effectively.",
-      "image": "https://img.freepik.com/free-vector/visual-data-concept-illustration_114360-1713.jpg?t=st=1714512880~exp=1714516480~hmac=07c164e5b14b5318c83ad578b7f58067d3d3b58b79096974204c2869614b93c8&w=740",
-      "tasks": [
-        {
-          "id": 101,
-          "title": "Implement User Authentication",
-          "description": "Develop user authentication functionality including login, logout, and user registration.",
-          "status": "To Do"
-        },
-        {
-          "id": 102,
-          "title": "Design Dashboard UI",
-          "description": "Create an intuitive and visually appealing dashboard interface for users to manage projects and tasks.",
-          "status": "In Progress"
-        },
-        {
-          "id": 103,
-          "title": "Integrate Task Management Features",
-          "description": "Integrate task creation, assignment, and tracking features to enable efficient task management within projects.",
-          "status": "Done"
-        }
-      ],
-      "members": [
-        { "id": 201, "name": "John Doe", "role": "Developer" },
-        { "id": 202, "name": "Jane Smith", "role": "Designer" },
-        { "id": 203, "name": "Alice Johnson", "role": "Tester" }
-      ]
-    },
-    {
-      "id": 2,
-      "title": "Mobile App Development Project",
-      "description": "An exciting project focused on developing a cutting-edge mobile application that offers innovative features and seamless user experience.",
-      "image": "https://img.freepik.com/premium-photo/future-building-construction-engineering-project_31965-2959.jpg?w=826",
-      "tasks": [
-        {
-          "id": 104,
-          "title": "Wireframe Creation",
-          "description": "Create wireframes and mockups for the mobile app's user interface to visualize the app's layout and features.",
-          "status": "To Do"
-        },
-        {
-          "id": 105,
-          "title": "Implement Core Functionality",
-          "description": "Develop the core functionality of the mobile app, including user registration, authentication, and basic features.",
-          "status": "To Do"
-        }
-      ],
-      "members": [
-        { "id": 204, "name": "David Brown", "role": "Developer" },
-        { "id": 205, "name": "Emma Lee", "role": "Designer" }
-      ]
-    },
-    {
-      "id": 3,
-      "title": "E-commerce Platform Enhancement",
-      "description": "An ongoing project focused on enhancing the features and performance of an existing e-commerce platform to provide a seamless shopping experience.",
-      "image": "https://img.freepik.com/free-photo/businessman-working-futuristic-office_23-2151003756.jpg?t=st=1714512815~exp=1714516415~hmac=5d6601801ecc18648c3306221c3a37bb7de3b6531b1f0607cbdf2ae9b7b3f30f&w=996",
-      "tasks": [
-        {
-          "id": 106,
-          "title": "Optimize Website Performance",
-          "description": "Identify and optimize performance bottlenecks to improve website loading speed and overall performance.",
-          "status": "In Progress"
-        }
-      ],
-      "members": [
-        { "id": 206, "name": "Michael Johnson", "role": "Developer" },
-        { "id": 207, "name": "Olivia Clark", "role": "Designer" },
-        { "id": 208, "name": "Sophia Wilson", "role": "Tester" }
-      ]
-    },
-    {
-      "id": 4,
-      "title": "Data Analytics Dashboard",
-      "description": "A project aimed at developing a data analytics dashboard for visualizing and analyzing complex data sets to derive valuable insights.",
-      "image": "https://img.freepik.com/free-photo/bulb-with-3d-windmill-project-saving-energy_23-2148907408.jpg?t=st=1714512801~exp=1714516401~hmac=f58b77960e91b926631655fa8de368569750e1ac65e253fff5960b4ced548bdf&w=826",
-      "tasks": [],
-      "members": [
-        { "id": 209, "name": "Matthew Davis", "role": "Developer" },
-        { "id": 210, "name": "Ethan Martinez", "role": "Designer" }
-      ]
-    },
-    {
-      "id": 5,
-      "title": "Social Media Integration Project",
-      "description": "A project focused on integrating social media features into an existing platform to enhance user engagement and interaction.",
-      "image": "https://img.freepik.com/free-photo/still-life-business-roles-with-various-mechanism-pieces_23-2149352652.jpg?t=st=1714509672~exp=1714513272~hmac=e08e7fd990cdf1d55e7a8beb7dd7ff03799d65d40dcc28ef909e4671c62d810e&w=996",
-      "tasks": [],
-      "members": [
-        { "id": 211, "name": "Liam Garcia", "role": "Developer" },
-        { "id": 212, "name": "Isabella Hernandez", "role": "Tester" }
-      ]
-    }
-  ]
-}
+[
+  {
+    "title": "Enhanced Project Management System",
+    "description": "A comprehensive project management system designed to streamline project workflows, manage tasks efficiently, and track project progress effectively.",
+    "image": "https://img.freepik.com/free-vector/visual-data-concept-illustration_114360-1713.jpg?t=st=1714512880~exp=1714516480~hmac=07c164e5b14b5318c83ad578b7f58067d3d3b58b79096974204c2869614b93c8&w=740",
+    "tasks": [
+      {
+        "title": "Implement User Authentication",
+        "description": "Develop user authentication functionality including login, logout, and user registration.",
+        "status": "To Do"
+      },
+      {
+        "title": "Design Dashboard UI",
+        "description": "Create an intuitive and visually appealing dashboard interface for users to manage projects and tasks.",
+        "status": "In Progress"
+      },
+      {
+        "title": "Integrate Task Management Features",
+        "description": "Integrate task creation, assignment, and tracking features to enable efficient task management within projects.",
+        "status": "Done"
+      }
+    ],
+    "members": [
+      { "id": 201, "name": "John Doe", "role": "Developer" },
+      { "id": 202, "name": "Jane Smith", "role": "Designer" },
+      { "id": 203, "name": "Alice Johnson", "role": "Tester" }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Mobile App Development Project",
+    "description": "An exciting project focused on developing a cutting-edge mobile application that offers innovative features and seamless user experience.",
+    "image": "https://img.freepik.com/premium-photo/future-building-construction-engineering-project_31965-2959.jpg?w=826",
+    "tasks": [
+      {
+        "id": 104,
+        "title": "Wireframe Creation",
+        "description": "Create wireframes and mockups for the mobile app's user interface to visualize the app's layout and features.",
+        "status": "To Do"
+      },
+      {
+        "id": 105,
+        "title": "Implement Core Functionality",
+        "description": "Develop the core functionality of the mobile app, including user registration, authentication, and basic features.",
+        "status": "To Do"
+      }
+    ],
+    "members": [
+      { "id": 204, "name": "David Brown", "role": "Developer" },
+      { "id": 205, "name": "Emma Lee", "role": "Designer" }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "E-commerce Platform Enhancement",
+    "description": "An ongoing project focused on enhancing the features and performance of an existing e-commerce platform to provide a seamless shopping experience.",
+    "image": "https://img.freepik.com/free-photo/businessman-working-futuristic-office_23-2151003756.jpg?t=st=1714512815~exp=1714516415~hmac=5d6601801ecc18648c3306221c3a37bb7de3b6531b1f0607cbdf2ae9b7b3f30f&w=996",
+    "tasks": [
+      {
+        "id": 106,
+        "title": "Optimize Website Performance",
+        "description": "Identify and optimize performance bottlenecks to improve website loading speed and overall performance.",
+        "status": "In Progress"
+      }
+    ],
+    "members": [
+      { "id": 206, "name": "Michael Johnson", "role": "Developer" },
+      { "id": 207, "name": "Olivia Clark", "role": "Designer" },
+      { "id": 208, "name": "Sophia Wilson", "role": "Tester" }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Data Analytics Dashboard",
+    "description": "A project aimed at developing a data analytics dashboard for visualizing and analyzing complex data sets to derive valuable insights.",
+    "image": "https://img.freepik.com/free-photo/bulb-with-3d-windmill-project-saving-energy_23-2148907408.jpg?t=st=1714512801~exp=1714516401~hmac=f58b77960e91b926631655fa8de368569750e1ac65e253fff5960b4ced548bdf&w=826",
+    "tasks": [],
+    "members": [
+      { "id": 209, "name": "Matthew Davis", "role": "Developer" },
+      { "id": 210, "name": "Ethan Martinez", "role": "Designer" }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Social Media Integration Project",
+    "description": "A project focused on integrating social media features into an existing platform to enhance user engagement and interaction.",
+    "image": "https://img.freepik.com/free-photo/still-life-business-roles-with-various-mechanism-pieces_23-2149352652.jpg?t=st=1714509672~exp=1714513272~hmac=e08e7fd990cdf1d55e7a8beb7dd7ff03799d65d40dcc28ef909e4671c62d810e&w=996",
+    "tasks": [],
+    "members": [
+      { "id": 211, "name": "Liam Garcia", "role": "Developer" },
+      { "id": 212, "name": "Isabella Hernandez", "role": "Tester" }
+    ]
+  }
+]

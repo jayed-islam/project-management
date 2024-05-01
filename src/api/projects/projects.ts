@@ -6,16 +6,16 @@ export const fetchProjects = async (): Promise<IProject[]> => {
   return response.data;
 };
 
-export const fetchProjectById = async (id: number): Promise<IProject> => {
-  const response = await instance.get(`/project/${id}`);
+export const fetchProjectById = async (id: string): Promise<IProject> => {
+  const response = await instance.get(`/project/getone/${id}`);
   return response.data;
 };
 
 export const updateProject = async (
-  id: number,
+  id: string,
   updatedProject: Partial<IProject>
 ): Promise<IProject> => {
-  const response = await instance.put(`/project/${id}`, updatedProject);
+  const response = await instance.put(`/project/edit/${id}`, updatedProject);
   return response.data;
 };
 

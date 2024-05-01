@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, Input, message } from "antd";
 import { IProject } from "@/types/project";
-import useProjectStore from "@/zustand/project-state";
+import { useEditProject } from "@/api/projects/use-projects";
 
 interface EditProjectFormProps {
   project: IProject;
@@ -18,33 +18,45 @@ const EditProjectForm: React.FC<EditProjectFormProps> = ({
   project,
   modal,
 }) => {
-  const { editProject } = useProjectStore();
+  const [form] = Form.useForm();
+  const editProjectMutation = useEditProject();
+  const [isFormTouched, setIsFormTouched] = useState(false);
+  const handleSubmit = async (values: any) => {
+    try {
+      await editProjectMutation.mutateAsync({
+        id: project._id,
+        updatedProject: values,
+      });
+      modal.setFalse();
+      message.success("Project updated successfully");
+    } catch (error) {
+      message.error("Failed to update project");
+    }
+  };
 
-  const handleSave = (values: IProject) => {
-    const updatedProject = { ...project, ...values };
-    editProject(project.id, updatedProject);
-
-    modal.setFalse();
-    message.success("Project updated successfully!");
+  const handleValuesChange = () => {
+    setIsFormTouched(true);
   };
 
   return (
     <Form
+      form={form}
       initialValues={project}
-      onFinish={handleSave}
       onFinishFailed={() => {}}
+      onFinish={handleSubmit}
+      onValuesChange={handleValuesChange}
     >
       <Form.Item label="Title" name="title">
         <Input />
       </Form.Item>
       <Form.Item label="Description" name="description">
-        <Input.TextArea />
+        <Input.TextArea rows={5} />
       </Form.Item>
       <Form.Item label="Image URL" name="image">
         <Input />
       </Form.Item>
       <Form.Item>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" disabled={!isFormTouched}>
           Save
         </Button>
         <Button onClick={modal.setFalse}>Cancel</Button>

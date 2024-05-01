@@ -1,15 +1,16 @@
 export interface IProject {
-  id: number;
+  _id: string;
   title: string;
   description: string;
   image: string;
   tasks: Task[];
   members: Member[];
   recentActivities: Activity[];
+  status?: string;
 }
 
 export interface Task {
-  id: number;
+  _id?: string;
   title: string;
   description: string;
   status: TaskStatus;

@@ -21,4 +21,9 @@ const checkTokenValidity = (): boolean => {
   return true;
 };
 
-export { checkTokenValidity };
+function formatTimestamp(timestamp: string | Date) {
+  var date = new Date(timestamp);
+  return date.toLocaleString("en-US");
+}
+
+export { checkTokenValidity, formatTimestamp };

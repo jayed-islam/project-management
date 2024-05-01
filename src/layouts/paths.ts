@@ -4,7 +4,9 @@ export const paths = {
   auth: {
     signin: "/auth/signin",
   },
-  projects: "/projects",
+  projects: {
+    root: "/project",
+  },
   dashboard: {
     root: "/dashboard",
   },

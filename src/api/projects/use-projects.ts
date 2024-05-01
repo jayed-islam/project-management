@@ -11,7 +11,7 @@ export const useProjects = () => {
   return useQuery("projects", fetchProjects);
 };
 
-export const useProjectById = (id: number) => {
+export const useProjectById = (id: string) => {
   return useQuery<IProject>(["project", id], () => fetchProjectById(id));
 };
 
@@ -19,7 +19,7 @@ export const useEditProject = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    (data: { id: number; updatedProject: Partial<IProject> }) =>
+    (data: { id: string; updatedProject: Partial<IProject> }) =>
       updateProject(data.id, data.updatedProject),
     {
       onSuccess: () => {

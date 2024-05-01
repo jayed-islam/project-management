@@ -3,7 +3,6 @@
 import React, { useEffect } from "react";
 import { Col, Row } from "antd";
 import ProjectCard from "../project-card";
-import useProjectStore from "@/zustand/project-state";
 import { useProjects } from "@/api/projects/use-projects";
 
 const ProjectView = () => {

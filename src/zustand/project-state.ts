@@ -1,75 +1,176 @@
-import { IProject } from "@/types/project";
-import { create } from "zustand";
-import data from "./data.json";
+// import create from "zustand";
+// import { IProject, Task, TaskStatus } from "@/types/project";
 
-interface ProjectState {
-  projects: IProject[];
-  isLoading: boolean;
-  error: string | null;
-  loadProjects: () => Promise<void>;
-  addProject: (project: IProject) => void;
-  editProject: (projectId: number, updatedProject: IProject) => void;
-  deleteProject: (projectId: number) => void;
+// interface ProjectStore {
+//   project: IProject;
+//   projectLoading: boolean;
+//   projectError: any;
+//   projectValidating: boolean;
+
+//   setProject: (project: IProject) => void;
+//   addTaskToProject: (task: Task) => void;
+//   updateTaskInProject: (taskId: string, updatedTask: Partial<Task>) => void;
+//   deleteTaskFromProject: (taskId: string) => void;
+//   todoTasks: () => Task[];
+//   inProgressTasks: () => Task[];
+//   doneTasks: () => Task[];
+// }
+
+// const useProjectStore = create<ProjectStore>((set) => ({
+//   project: {
+//     _id: "",
+//     title: "",
+//     description: "",
+//     image: "",
+//     tasks: [],
+//     members: [],
+//     recentActivities: [],
+//   },
+//   projectLoading: false,
+//   projectError: null,
+//   projectValidating: false,
+
+//   setProject(project) {
+//     set({ project });
+//   },
+
+//   addTaskToProject(task) {
+//     set((state) => ({
+//       project: {
+//         ...state.project,
+//         tasks: [...state.project.tasks, task],
+//       },
+//     }));
+//   },
+
+//   updateTaskInProject(taskId, updatedTask) {
+//     set((state) => ({
+//       project: {
+//         ...state.project,
+//         tasks: state.project.tasks.map((task) =>
+//           task._id === taskId ? { ...task, ...updatedTask } : task
+//         ),
+//       },
+//     }));
+//   },
+
+//   deleteTaskFromProject(taskId) {
+//     set((state) => ({
+//       project: {
+//         ...state.project,
+//         tasks: state.project.tasks.filter((task) => task._id !== taskId),
+//       },
+//     }));
+//   },
+
+//   todoTasks() {
+//     return this.project.tasks.filter((task) => task.status === TaskStatus.TODO);
+//   },
+
+//   inProgressTasks() {
+//     return this.project.tasks.filter(
+//       (task) => task.status === TaskStatus.IN_PROGRESS
+//     );
+//   },
+
+//   doneTasks() {
+//     return this.project.tasks.filter((task) => task.status === TaskStatus.DONE);
+//   },
+// }));
+
+// export default useProjectStore;
+import create from "zustand";
+import { IProject, Task, TaskStatus } from "@/types/project";
+
+interface ProjectStore {
+  project: IProject;
+  projectLoading: boolean;
+  projectError: any;
+  projectValidating: boolean;
+
+  setProject: (project: IProject) => void;
+  addTaskToProject: (task: Task) => void;
+  updateTaskInProject: (taskId: string, updatedTask: Partial<Task>) => void;
+  deleteTaskFromProject: (taskId: string) => void;
+  moveTaskInProject: (taskId: string, newStatus: TaskStatus) => void;
+  getTaskLists: () => { name: string; tasks: Task[] }[];
 }
 
-const useProjectStore = create<ProjectState>((set) => ({
-  projects: [],
-  isLoading: true,
-  error: null,
-  loadProjects: async () => {
-    try {
-      const storedProjects = localStorage.getItem("projects");
-      if (storedProjects) {
-        set({
-          projects: JSON.parse(storedProjects),
-          isLoading: false,
-          error: null,
-        });
-      } else {
-        // const response = await fetch("data.json");
-        // const data = await response.json();
-
-        localStorage.setItem("projects", JSON.stringify(data.projects));
-
-        set({
-          projects: data.projects as unknown as IProject[],
-          isLoading: false,
-          error: null,
-        });
-      }
-    } catch (error) {
-      set({ projects: [], isLoading: false, error: "Failed to load projects" });
-    }
+const useProjectStore = create<ProjectStore>((set) => ({
+  project: {
+    _id: "",
+    title: "",
+    description: "",
+    image: "",
+    tasks: [], // Initialize tasks as an empty array
+    members: [],
+    recentActivities: [],
   },
-  addProject: (project: IProject) => {
-    set((state) => {
-      const updatedProjects = [...state.projects, project];
-      localStorage.setItem("projects", JSON.stringify(updatedProjects));
-      return { projects: updatedProjects };
-    });
+  projectLoading: false,
+  projectError: null,
+  projectValidating: false,
+
+  setProject(project) {
+    set({ project });
   },
 
-  editProject: (projectId: number, updatedProject: Partial<IProject>) => {
-    set((state) => {
-      const updatedProjects = state.projects.map((project) =>
-        project.id === projectId ? { ...project, ...updatedProject } : project
-      );
-      localStorage.setItem("projects", JSON.stringify(updatedProjects));
-      return { projects: updatedProjects };
-    });
+  addTaskToProject(task) {
+    set((state) => ({
+      project: {
+        ...state.project,
+        tasks: [...state.project.tasks, task],
+      },
+    }));
   },
 
-  deleteProject: (projectId: number) => {
-    set((state) => {
-      const updatedProjects = state.projects.filter(
-        (project) => project.id !== projectId
-      );
-      localStorage.setItem("projects", JSON.stringify(updatedProjects));
-      return { projects: updatedProjects };
-    });
+  updateTaskInProject(taskId, updatedTask) {
+    set((state) => ({
+      project: {
+        ...state.project,
+        tasks: state.project.tasks.map((task) =>
+          task._id === taskId ? { ...task, ...updatedTask } : task
+        ),
+      },
+    }));
+  },
+
+  deleteTaskFromProject(taskId) {
+    set((state) => ({
+      project: {
+        ...state.project,
+        tasks: state.project.tasks.filter((task) => task._id !== taskId),
+      },
+    }));
+  },
+
+  moveTaskInProject(taskId, newStatus) {
+    set((state) => ({
+      project: {
+        ...state.project,
+        tasks: state.project.tasks.map((task) =>
+          task._id === taskId ? { ...task, status: newStatus } : task
+        ),
+      },
+    }));
+  },
+
+  getTaskLists() {
+    const { tasks } = this.project;
+    return [
+      {
+        name: TaskStatus.TODO,
+        tasks: tasks.filter((task) => task.status === TaskStatus.TODO),
+      },
+      {
+        name: TaskStatus.IN_PROGRESS,
+        tasks: tasks.filter((task) => task.status === TaskStatus.IN_PROGRESS),
+      },
+      {
+        name: TaskStatus.DONE,
+        tasks: tasks.filter((task) => task.status === TaskStatus.DONE),
+      },
+    ];
   },
 }));
-
-useProjectStore.getState().loadProjects();
 
 export default useProjectStore;
