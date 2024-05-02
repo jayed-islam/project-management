@@ -26,4 +26,10 @@ function formatTimestamp(timestamp: string | Date) {
   return date.toLocaleString("en-US");
 }
 
-export { checkTokenValidity, formatTimestamp };
+function calculateDeadline(): Date {
+  const currentDate = new Date();
+  const deadline = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000);
+  return deadline;
+}
+
+export { checkTokenValidity, formatTimestamp, calculateDeadline };

@@ -4,6 +4,7 @@ import { useProjectById } from "@/api/projects/use-projects";
 import { Spin } from "antd";
 import React from "react";
 import ProjectDetails from "../project-detail";
+import { IProject } from "@/types/project";
 
 interface IProjectDetailProps {
   id: string;
@@ -19,7 +20,7 @@ const ProjectDetailView = ({ id }: IProjectDetailProps) => {
   if (isError) {
     return <div>Error fetching project</div>;
   }
-  return <ProjectDetails project={project} />;
+  return <ProjectDetails project={project as IProject} />;
 };
 
 export default ProjectDetailView;

@@ -28,21 +28,18 @@ const AppMainLayout: React.FC<Props> = ({ children }) => {
           console.log(collapsed, type);
         }}
       >
-        <div className=" mb-7 mt-3 h-11 bg-slate-700 m-2 rounded-lg" />
+        <div className=" mb-7 mt-3 py-2 bg-slate-700 m-2 rounded-lg text-white text-center font-semibold">
+          Project Manager
+        </div>
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["4"]}
+          defaultSelectedKeys={["1"]}
           items={[
             {
               key: "1",
               icon: <UploadOutlined />,
-              label: "nav 1",
-            },
-            {
-              key: "2",
-              icon: <VideoCameraOutlined />,
-              label: "nav 2",
+              label: "Projects",
             },
           ]}
         />

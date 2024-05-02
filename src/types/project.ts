@@ -4,7 +4,7 @@ export interface IProject {
   description: string;
   image: string;
   tasks: Task[];
-  members: Member[];
+  members: IMember[];
   recentActivities: Activity[];
   status?: string;
 }
@@ -14,6 +14,7 @@ export interface Task {
   title: string;
   description: string;
   status: TaskStatus;
+  assignees?: IMember[];
 }
 
 export enum TaskStatus {
@@ -22,7 +23,7 @@ export enum TaskStatus {
   DONE = "Done",
 }
 
-export interface Member {
+export interface IMember {
   name: string;
   role: string;
 }
