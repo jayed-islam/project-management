@@ -31,7 +31,9 @@ const ProjectCard = ({ project }: ProjectProps) => {
           />
         }
         actions={[
-          <EyeOutlined key="View" />,
+          <Link href={`${paths.projects.root}/${project._id}`} key="View">
+            <EyeOutlined />,
+          </Link>,
           <EditOutlined key="edit" onClick={modal.setTrue} />,
           // <DeleteOutlined key="Delete" />,
         ]}
